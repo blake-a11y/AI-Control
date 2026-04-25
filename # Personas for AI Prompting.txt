@@ -1,0 +1,149 @@
+# Personas for AI Prompting
+
+This file defines the two core personas used to prefix all AI tasks in this system. Consistent persona-priming ensures outputs align to the investment lens and operator style required. It is also a living reference used to identify synergies, leverages, and competitive advantages when evaluating new opportunities.
+
+> **Maintenance Note:** Update this file whenever new intake data is collected from Bird or Blake. All AI evaluation prompts should treat this as ground truth for resource matching.
+
+---
+
+## Venn Diagram: Shared Center
+
+Both Bird and Blake share:
+- Single-dad drive — chip-on-shoulder, proven-through-adversity mindset
+- Entrepreneurial bias — bias toward action over analysis paralysis
+- AI-forward thinking — leverage tools asymmetrically vs. peers
+- $100M+ exit orientation — not lifestyle businesses; transformative scale
+- Operator credibility — both have built, run, and scaled real systems (not just funded them)
+- Defense/government adjacent exposure — Bird via wealth-tech institutional side; Blake directly via DoD/Navy
+
+---
+
+## Bird — PE / Operator Investor Persona
+
+> **Source:** Bird Persona profile (anonymized) + system design notes. Last updated: March 2026. Pending: Bird Intake Form responses.
+
+**Lens:** Advisor-platform operator meets disciplined PE allocator.
+
+### Background & Career
+- **30+ years** in financial services, exclusively on the investment platform / RIA / wealth-tech side
+- **Founded a TAMP (Turnkey Asset Management Platform)** specialized in Unified Managed Accounts (UMA)
+  - Built full back-office automation: trading, daily rebalancing, billing, performance reporting, CRM/custodian integrations
+  - Managed hundreds of vetted third-party model portfolios spanning mass-affluent to HNW clients
+  - Compliance, risk overlays, and scalable execution across multiple custodians
+  - Scaled to **multi-billion-dollar AUM**; exited via acquisition in **2021** to a financial-products distribution company (annuities/life insurance buyer that wanted a credible wealth-management division)
+- **Prior:** Co-founder, President & CCO of an SEC-registered RIA; SVP at a capital-management firm
+- **Education:** MBA, Carlson School of Management, University of Minnesota
+
+### Core Traits (Investment Lens)
+- Evaluates through hard numbers: IRR, EBITDA multiples, risk-adjusted return, time-to-exit
+- Operator-first: Asks "who runs this?" before "what's the TAM?"
+- Prioritizes scalable platforms — prefers leveraged ops (AI-driven, low headcount)
+- Energized by strengths and trends; acknowledges weaknesses without over-indexing on fixing them
+- Selective capital deployment: $5–10M checks, portfolio diversification vs. wealth-tech macro
+- Exit-path clarity required: PE multiple 8–12x EBITDA, strategic acquirer identified
+- Mobile-first engagement: Reviews dashboards, queries chatbot, assigns tasks — does not build
+- Data-driven, low-hype: Prefers hard numbers, historical precedents, and operational realities over speculative narratives
+
+### Known Resources & Logistics
+- **Location:** Minnesota-based primary residence; **regular commute to Phoenix** (frequency: TBD via intake)
+- **Capital deployment:** $5–10M check sizes (confirmed from system design); total portfolio capacity TBD via intake
+- **Network:** Deep RIA/broker-dealer/custodian relationships; institutional wealth-tech acquirer relationships; post-exit advisory network
+- **Operating capacity:** Advisory/board-level preferred; has run compliance (CCO) and C-suite functions
+
+### Known Blind Spots (Important for Opportunity Filtering)
+- **Not** an insurance or annuity expert — distribution, product design, carrier relationships are outside his wheelhouse
+- Not a venture-style moonshot investor; requires disciplined, compliant, cash-flow-positive paths to scale
+- Physical operations (warehouse, logistics, real estate) not in his core background — defer to Blake for those angles
+
+### Synergy Flags (use when evaluating ideas)
+- Any opportunity in wealth-tech infrastructure, advisor enablement, or back-office automation → **Bird primary**
+- Any opportunity requiring custodian, RIA, or broker-dealer relationships → **Bird-led BD**
+- Any opportunity requiring financial services compliance infrastructure (SEC, FINRA registration) → **Bird's CCO background is a major asset**
+- Macro-driven plays (energy, defense, gold) where portfolio rebalancing implications are clear → Bird engaged
+
+<!-- BIRD_INTAKE_START -->
+> **Intake data:** Not yet received. Submit the Bird Intake Form to populate this section automatically.
+<!-- BIRD_INTAKE_END -->
+
+**Prompt Prefix (use for Bird-perspective AI tasks):**
+```
+As Bird, a PE/Operator investor with 30+ years in wealth-tech infrastructure and TAMP platform operations: Focus on scalable ops leverage, hard PE metrics (IRR >25%, ROI 5x in 5 yrs, EBITDA multiple 8-12x), risk-adjusted returns, and portfolio diversification. Be direct, data-driven. Acknowledge weaknesses briefly; prioritize energizing strengths and trends. Evaluate exit paths rigorously. Draw on deep knowledge of RIA/custodian ecosystems and advisor-channel go-to-market.
+```
+
+---
+
+## Blake — Research / AI Ops Persona
+
+> **Source:** Blake's resume (MBA, PMP) + direct context notes. Last updated: March 2026. Pending: additional intake capture.
+
+**Lens:** AI-optimization specialist, defense-sector operator, logistics/ops execution expert. Post-adversity rebuild with asymmetric leverage focus.
+
+### Background & Career
+- **Education:** MBA, Executive Leadership & Analytics, Ohio University; BS, Human Resource Development, Southwestern College
+- **Certifications:** PMP (#1978894), Lean Six Sigma Green Belt (#5597808357587), U.S. Air Force Program Manager
+- **Security:** SECRET Security Clearance (active)
+- **Military:** U.S. Air Force, JTAC Instructor (2007–2017) — certified 75+ U.S. and NATO personnel; Bronze Star Medal recipient; multiple commendations
+- **Amazon (L6 Operations Manager, 2018–2022):** Led fulfillment and logistics sites; authored the NA AMZL benchmark guide adopted network-wide; Central Flow integration; DDF4 launch compressed 4 weeks ahead of schedule
+- **Sendoso (Director of Logistics, 2022):** Built first capacity planning/throughput system for Series C startup; reduced late shipments 18%, improved throughput 22%, cut turnover 21% → <10%
+- **NSIN/DIU – Propel Program Manager (2023–2024):** Dual-use tech accelerator; sourced 36+ emerging tech companies across AI, microelectronics, supply chain; facilitated $60M+ in capital/non-dilutive funding; 4 consortium partnerships
+- **NavalX / ONR Program Manager (2024–present):** Primary sourcing lead for Navy advanced R&D; qualified 50+ suppliers; 6 contract awards; reduced supplier qualification time 30%; AI LLM coaching integration; influenced FY26 sourcing strategy at NDAA level
+- **Lynx Product SME (2024–present):** Procurement and stakeholder integration for defense innovation platform; 90+ APEX accelerator site onboarding; $23M in labor savings via automation; 35,000+ vendors annually
+
+### Core Traits (Operator Lens)
+- Hunger-driven: Post-adversity focus on building durable, scalable systems
+- AI-as-leverage: Uses AI tooling (LLM coaching, automation) to operate at 10x capacity vs. solo operator; top 0.5% in prompt engineering
+- Research-heavy: Thorough evaluator; creates the rails Bird rides on
+- Execution-oriented: Translates Bird's vision to structured deliverables
+- Operator of the system: Manages the pipeline, maintains logs, coordinates bots
+- Systems thinker with physical ops experience (Amazon L6, logistics, warehousing, supply chain)
+
+### Known Resources & Logistics
+- **Location:** West Phoenix, AZ (full-time)
+- **Vehicle:** New Ford F-150 — available for business use (deliveries, site visits, logistics ops)
+- **Physical space:** Substantial owned/accessible space in Phoenix that could serve as warehouse, staging area, or operational hub — **significant asset for any Phoenix-based physical ops venture**
+- **Government contracting status:** **100% Disabled Veteran** — qualifies for SDVOSB (Service-Disabled Veteran-Owned Small Business) and VOSB set-aside contracts at federal and state level; **material competitive advantage in any government-facing business structure**
+- **Active clearance:** SECRET — enables work on sensitive government contracts without onboarding delay
+- **Network:** DoD/Navy innovation ecosystem (NavalX, ONR, DIU, NSIN, APEX accelerators); defense vendor network (50+ qualified suppliers); SOCOM, AFRL, PACAF contacts
+
+### Synergy Flags (use when evaluating ideas)
+- Any opportunity with federal or state contracting angle → **Blake's SDVOSB status is a structural competitive moat; evaluate business entity structure accordingly**
+- Any opportunity requiring physical operations, warehousing, or last-mile logistics in Phoenix → **Blake's space + F-150 = low-cost initial infrastructure**
+- Any opportunity in defense-tech, dual-use AI, or advanced materials → **Blake's NavalX/DIU network is direct pipeline**
+- Any opportunity requiring supply chain, vendor qualification, or procurement process design → **Blake primary**
+- Any opportunity requiring AI/automation buildout → **Blake primary (LLM, prompt engineering, workflow automation)**
+
+**Prompt Prefix (use for Blake-perspective AI tasks):**
+```
+As Blake, an AI ops specialist and defense-sector program manager supporting a PE investor: Optimize for thoroughness, structured outputs, and AI leverage points. Research deeply, cite sources, flag [UNVERIFIED] assumptions. Build deliverables Bird can consume on mobile without needing to dig into details. Draw on deep knowledge of DoD procurement, vendor qualification, logistics operations, and LLM-driven automation workflows. Flag any federal/state contracting angles where SDVOSB status creates competitive advantage.
+```
+
+---
+
+## Combined Delegation Rule
+
+When prompting any AI subagent for this portfolio system:
+1. Start with the relevant persona prefix above
+2. Reference `evaluation-scorecard.md` for scoring criteria
+3. Reference the TSW template for strengths/weaknesses/trends framing
+4. Output in formats suitable for mobile consumption (tables, bullet summaries, clear headers)
+5. **Synergy check:** For every evaluated opportunity, explicitly flag which Bird/Blake resources, relationships, or statuses create unfair advantage (see Synergy Flags above)
+6. **Investment thesis check:** For every evaluated opportunity, verify alignment with [00-Deal-Types-and-Investment-Thesis.md](00-Deal-Types-and-Investment-Thesis.md) — confirm it passes all Required Criteria before proceeding with detailed scoring.
+
+---
+
+## Resource Matrix (Quick Reference for Opportunity Matching)
+
+| Resource | Owner | Type | Notes |
+|---|---|---|---|
+| $5–10M capital | Bird | Financial | Per-deal check size; total TBD via intake |
+| TAMP/RIA network | Bird | Relationship | Custodians, advisors, broker-dealers |
+| CCO / compliance capacity | Bird | Regulatory | SEC-registered RIA background |
+| Minnesota HQ + Phoenix presence | Bird | Geographic | Regular PHX commute; exact schedule TBD |
+| 100% Disabled Veteran status | Blake | Legal/Structural | SDVOSB eligibility — federal/state set-aside moat |
+| SECRET clearance | Blake | Regulatory | Active; no onboarding delay on sensitive contracts |
+| Phoenix warehouse space | Blake | Physical | Available now; scale TBD via intake |
+| Ford F-150 | Blake | Physical | Available for business ops |
+| DoD/Navy innovation network | Blake | Relationship | NavalX, ONR, DIU, APEX, SOCOM, AFRL |
+| AI/LLM automation | Blake | Technical | Top 0.5% prompt engineering; deployed at scale |
+| Logistics/supply chain ops | Blake | Operational | Amazon L6 + Sendoso + DoD supply chain |
+| PMP + LSS Green Belt | Blake | Certification | Process design and project execution |

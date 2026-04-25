@@ -1,0 +1,136 @@
+# Deal Types & Investment Thesis
+
+> **Venture Portfolio System — Governance Document**
+> Defines the investment thesis, deal categories, evaluation criteria, and portfolio rules that guide all opportunity evaluation in this system.
+> Referenced by all AI evaluation prompts and the 13-point Blueprint research process.
+
+---
+
+## Investment Thesis Summary
+
+We target **AI-leveraged, recurring-revenue platforms** with clear paths to **$100M+ exits within 5 years**. Every opportunity must score against hard PE metrics (IRR >25%, EBITDA multiple 8–12×, risk-adjusted ROI 5× in 5 years) and fit the combined resources of the partnership (Bird's capital + wealth-tech network; Blake's AI ops + defense/government access + SDVOSB status).
+
+**Core filters:**
+- Recurring revenue model (MRR/ARR preferred)
+- AI-driven scalability (low marginal cost at scale)
+- TAM > $1B with defensible SAM/SOM
+- Exit path identified (strategic acquirer or PE roll-up)
+- Execution fit: leverages Bird and/or Blake's specific resources
+- Cash-flow positive path within 18 months
+
+---
+
+## Required Criteria (Must-Pass)
+
+Every opportunity entering the portfolio must satisfy **all** of the following:
+
+| # | Criterion | Threshold |
+|---|-----------|-----------|
+| 1 | Recurring revenue model exists or is achievable | MRR/ARR path identifiable |
+| 2 | AI scalability is core to the model | Not a bolt-on; structural advantage |
+| 3 | Total Addressable Market | TAM > $1B |
+| 4 | Exit path is identifiable | PE multiple or strategic acquirer named |
+| 5 | IRR (base case) | > 25% |
+| 6 | Risk-adjusted return | Positive outcome in pessimistic scenario |
+| 7 | Execution fit | Maps to at least 1 partner's resources |
+
+---
+
+## Preferred Criteria (Score Boosters)
+
+These are not required but increase a deal's priority ranking:
+
+- SDVOSB / government contracting angle (Blake's structural moat)
+- Phoenix AZ geographic advantage (Blake's physical ops assets)
+- Wealth-tech / advisor-channel distribution (Bird's network)
+- Cross-portfolio synergy with existing deals
+- Low initial capital requirement (< $500K to validate)
+- Time-to-revenue under 6 months
+
+---
+
+## Deal Type Categories
+
+### Category 1: Platform / SaaS
+**Description:** Software platforms with subscription revenue and AI-driven automation.
+**Examples:** TAMP infrastructure, advisor enablement tools, back-office automation.
+**Bird fit:** Deep domain expertise, network distribution.
+**Blake fit:** AI buildout, automation, prompt engineering.
+**Target metrics:** MRR growth >15% MoM, churn <5%, LTV:CAC >3:1.
+
+### Category 2: Defense / GovTech
+**Description:** Dual-use technology for Department of Defense and federal agencies.
+**Examples:** AI procurement tools, supply chain tracking, sensor fusion.
+**Bird fit:** Compliance infrastructure, institutional sales.
+**Blake fit:** Primary — NavalX/DIU/ONR network, SECRET clearance, SDVOSB set-asides.
+**Target metrics:** Contract backlog, SBIR/STTR pipeline, non-dilutive funding secured.
+
+### Category 3: Physical Ops / Last-Mile
+**Description:** Operationally intensive businesses with AI-optimized logistics.
+**Examples:** Robotaxi fleets, warehouse operations, delivery services.
+**Bird fit:** Capital deployment, PE-style operational oversight.
+**Blake fit:** Primary — Amazon L6 ops background, Phoenix warehouse, F-150.
+**Target metrics:** Unit economics per trip/delivery, fleet utilization >65%, regulatory approvals.
+
+### Category 4: Wealth-Tech / FinTech
+**Description:** Financial services infrastructure and advisor-facing technology.
+**Examples:** UMA platforms, robo-advisory, compliance automation, billing systems.
+**Bird fit:** Primary — 30+ years, built and exited a TAMP.
+**Blake fit:** AI/automation layer, data pipeline engineering.
+**Target metrics:** AUM growth, advisor adoption rate, revenue per advisor.
+
+### Category 5: AI Services / Consulting
+**Description:** Service businesses leveraging AI for delivery at scale.
+**Examples:** AI business plan consulting, automated research services.
+**Bird fit:** Client acquisition via network, quality oversight.
+**Blake fit:** Primary — AI tooling, prompt engineering, delivery automation.
+**Target metrics:** Revenue per engagement, client acquisition cost, repeat rate.
+
+---
+
+## Exclusion Zones
+
+The following are explicitly **out of scope** for this portfolio:
+
+| Excluded | Reason |
+|----------|--------|
+| Insurance / annuity products | Outside Bird's expertise; regulatory complexity |
+| Pure consumer apps (B2C) | No recurring revenue path at PE-grade metrics |
+| Crypto / blockchain speculative | Does not meet cash-flow-positive requirement |
+| Lifestyle businesses | Below $100M exit threshold |
+| Capital-intensive manufacturing (>$10M entry) | Exceeds check-size parameters |
+| Businesses requiring >50 FTEs in Year 1 | Conflicts with AI-leveraged, low-headcount thesis |
+
+---
+
+## Evaluation Scorecard Reference
+
+All opportunities are scored using the [Evaluation Scorecard](evaluation-scorecard.md) — 7 criteria, each scored 1–10:
+
+1. **Recurring Revenue** — Clear MRR/ARR path; churn <10%
+2. **AI Scalability** — 5-year growth via AI ops; low marginal cost
+3. **Market Size** — TAM >$1B; SAM/SOM defensible
+4. **Exit Path** — PE multiple 8–12× achievable; acquirer identified
+5. **Execution Fit** — Matches Bird + Blake resources
+6. **Risk-Adjusted Return** — IRR >25%; pessimistic scenario positive
+7. **Portfolio Diversification** — Complements existing portfolio
+
+**Thresholds:**
+- **≥ 7.0 average (≥ 49/70):** GO — Full Blueprint research
+- **5.0–6.9 average:** HOLD — Revisit after market validation
+- **< 5.0 average:** NO GO — Archive
+
+---
+
+## Portfolio Management Rules
+
+1. **Target portfolio size:** 5–15 active opportunities
+2. **Diversification:** No single category >40% of portfolio by capital allocation
+3. **Review cadence:** Monthly portfolio review; quarterly deep-dives on top 3
+4. **Status progression:** idea-seed → in-analysis → research-complete → decision-pending → in-portfolio (or rejected)
+5. **Audit trail:** Every status change, comment, and evaluation is versioned in the repo
+6. **No deletions:** History preserved via git. Rejected deals stay archived, not removed.
+
+---
+
+*Document Version: 1.0 | Created: March 2026 | Venture Portfolio System*

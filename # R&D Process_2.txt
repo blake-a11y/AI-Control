@@ -1,0 +1,396 @@
+# R&D Process — Generic Reusable Framework
+
+## Document Metadata
+- Version: 1.0
+- Methodology Architect: Claude Opus 4.7
+- Design date: 2026-04-25
+- Tool-agnostic: yes
+- Subject-agnostic: yes
+- Downstream destination: Interactive HTML briefing + mobile-optimized PDF export (PE / Operator Investor archetype, mobile-first, forwardable)
+
+## PART 1 — Process Overview
+
+This framework converts arbitrary research subjects into structured, citation-rigorous, briefing-ready outputs through a disciplined pipeline of narrow, containerized tasks. The framework rests on six load-bearing principles: containerized research over open-ended inquiry; token discipline as a quality lever; vectors and guardrails over creative latitude; drift detection as the Operator's first job; no work without a destination; and atomic outputs that assemble cleanly.
+
+End-to-end flow: a subject enters at **Intake**, where the Operator confirms it has a defined consumer question and a place in the briefing. The subject is decomposed at **Scoping** into one or more containerized tasks, each with a single answerable question, a scope fence, a required output shape, and — non-negotiably — a destination mapping that names which briefing section, visual, or expandable detail the output will feed. Tasks without a destination mapping do not advance. At **Assignment**, each task is matched to a Bot whose capabilities fit (search-heavy, synthesis-heavy, computation-heavy, source-restricted). The Bot **Executes** within the scope fence, producing output in the briefing-assembly form pre-declared at Scoping. The output enters **Validation** against task-specific success criteria, citation rigor, and assembly-readiness — does it drop into the briefing slot without rewrite? **Integration** binds validated output to its briefing destination with traceability metadata preserved. **Retirement** archives or refreshes outputs as recency requirements lapse.
+
+The destination format is fixed and shapes every upstream decision. The deliverable is an interactive HTML briefing — mobile-first, collapsible, layered, no horizontal scroll — with a mobile-optimized PDF export. The primary consumer is a PE / Operator Investor: 30+ years in financial services, $5–10M check size, IRR >25% required, 8–12× EBITDA exit required, mobile-first scanner, low-hype, hard-numbers-and-precedents oriented. The deliverable must survive forwarding to a co-investor or LP without re-explanation. This consumer profile drives task-shape decisions backward through the pipeline: outputs are atomic, numerically dense where claims allow it, citation-traceable, and rendered in forms (tables, scenario matrices, exit-path diagrams, trend lines) that answer specific consumer questions rather than decorate.
+
+The Operator's primary job during the lifecycle is not execution — it is drift detection. Scope drift, context pollution, padding, hallucinated citations, format drift, authority drift, recency rot, synthesis drift, destination mismatch, and visual padding are named failure modes with named countermeasures, each tied to a specific lifecycle stage and a specific detection signal. The framework treats AI agents as constrained search and structured-evaluation engines, not creative collaborators, and concentrates context tightly in each task to preserve output quality.
+
+## PART 2 — Roles and Responsibilities
+
+**Operator** — the human directing the process.
+- Primary responsibility: scope discipline, drift detection, destination-mapping enforcement.
+- Owns: subject intake decisions, scoping decomposition, Bot selection, validation calls, retirement triage.
+- Hands off: containerized tasks to Bots; validated outputs to the Briefing Assembler.
+- Monitors: scope creep signals, token-budget overruns, citation authority slippage, output-shape divergence from briefing-assembly form, recency timestamps approaching expiration.
+
+**Bot** — an AI agent executing a single containerized research task.
+- Primary responsibility: produce an output matching the task's required output shape and briefing-assembly form, citing all non-trivial claims, stopping at the stop condition without padding.
+- Owns: task execution within scope fence, self-validation hooks, explicit declaration when scope is insufficient or sources do not exist.
+- Hands off: completed output with citation list and self-validation answers to Validation.
+- Monitors: its own token budget, scope-fence violations in its own draft, citations it cannot verify, claims it cannot anchor in retrieved evidence.
+
+**Reviewer** — the validator. May be the Operator, a different Bot in a fresh context, or an SME human.
+- Primary responsibility: pass/fail decisions against task success criteria and assembly-readiness for the briefing.
+- Owns: rubric application, automatic-fail enforcement, retry protocol, escalation when borderline.
+- Hands off: pass decisions to Integration; fail decisions back to Bot or Operator with named failure mode.
+- Monitors: pattern failures across tasks (a Bot or task type repeatedly failing on the same axis signals a systemic scoping problem, not a Bot problem).
+
+**Briefing Assembler** — assembles validated outputs into the HTML briefing and PDF export.
+- Primary responsibility: place validated outputs into their pre-declared briefing slots without rewriting; preserve traceability from briefing claim to source task and citations; surface conflicting findings across tasks rather than reconciling them silently.
+- Owns: HTML briefing structure, navigation, mobile rendering, PDF export fidelity, traceability metadata, conflict-surfacing UI affordances.
+- Hands off: assembled briefing to the Operator for final review and release.
+- Monitors: rendering issues on mobile, broken citation links, sections where source recency has lapsed, conflicts between task outputs that need surfacing rather than smoothing.
+
+**Synthesizer** — invoked only when multiple atomic task outputs require integration into a single derived view (e.g., a comparative ranking that depends on three separate data-collection tasks). Often the same human as the Operator. Distinct role because synthesis carries its own drift mode.
+- Primary responsibility: produce a derived output that combines atomic findings without losing traceability to underlying tasks.
+- Owns: synthesis logic, conflict declaration, source attribution within the synthesized view.
+- Hands off: synthesized output to Validation as a new task with its own success criteria.
+- Monitors: synthesis drift — derived claims that exceed what underlying tasks support.
+
+## PART 3 — The Lifecycle of a Research Task
+
+### Stage 1 — Intake
+
+- **Entry conditions:** A subject, question, or research need has been articulated. A consumer (or the Operator standing in for the consumer) has declared interest.
+- **What happens:** The Operator confirms the subject has (a) a defined consumer question, (b) a tentative location in the briefing, (c) a recency expectation, and (d) plausible source authority. Subjects failing any of these are returned to the requester for sharpening.
+- **Exit conditions:** Subject is admitted with a tentative briefing-section assignment and a recency requirement.
+- **Common failure modes:** Vague subjects ("research the market") admitted without sharpening; subjects admitted without a briefing destination; subjects admitted that duplicate existing live tasks.
+- **Active anti-drift mechanisms:** Destination-mapping precondition; duplicate-check against live task register.
+
+### Stage 2 — Scoping
+
+- **Entry conditions:** Admitted subject with tentative briefing-section assignment.
+- **What happens:** Operator decomposes the subject into one or more containerized tasks. Each task is constructed using the Part 4 task-shape template. Each task receives a destination mapping (briefing section, visual, or expandable detail) and a briefing-assembly form (table with N columns, narrative with word ceiling, matrix data structure, etc.). Tasks without both fields filled are rejected at this stage. Scope fences are explicitly written — what is in, what is out.
+- **Exit conditions:** Every task in the decomposition has all required Part 4 fields populated and a defined Bot-capability profile.
+- **Common failure modes:** Tasks scoped too broadly ("survey the competitive landscape"); destination mapping deferred to validation; briefing-assembly form left vague.
+- **Active anti-drift mechanisms:** Scope-fence requirement; destination-mapping precondition; briefing-assembly form precondition.
+
+### Stage 3 — Assignment
+
+- **Entry conditions:** Fully scoped task with capability profile.
+- **What happens:** Operator selects a Bot whose capabilities match the task profile. Search-heavy tasks go to Bots with strong retrieval; synthesis tasks go to Bots with strong reasoning; numerically rigorous tasks go to Bots with verified computation. Each task runs in a fresh context window with no prior task contamination.
+- **Exit conditions:** Bot is loaded with the full task package and nothing else.
+- **Common failure modes:** Capability mismatch; context pollution from prior tasks; multiple tasks bundled into one context to "save effort."
+- **Active anti-drift mechanisms:** Fresh-context rule; one-task-one-context rule.
+
+### Stage 4 — Execution
+
+- **Entry conditions:** Bot loaded with task package in a clean context.
+- **What happens:** Bot executes within the scope fence, producing output in the required output shape and briefing-assembly form. Bot answers validation hooks before submitting. Bot stops at the stop condition. If the scope is insufficient or sources do not exist, the Bot declares this rather than fabricating.
+- **Exit conditions:** Bot has produced output, citation list, and answered self-validation hooks.
+- **Common failure modes:** Padding to fill perceived expectations; hallucinated citations; output drifting outside the scope fence; output produced in the wrong format.
+- **Active anti-drift mechanisms:** Stop condition; self-validation hooks; explicit no-pad instruction; declare-don't-fabricate rule.
+
+### Stage 5 — Validation
+
+- **Entry conditions:** Submitted Bot output with citations and self-validation answers.
+- **What happens:** Reviewer applies the pass/fail rubric (Part 6). Two axes of judgment: task-internal quality (does the output answer the question with rigor?) and assembly-readiness (does it drop into its briefing slot without rewrite?). Automatic-fail conditions are enforced absolutely. Borderline outputs escalate.
+- **Exit conditions:** Output is marked pass, fail, or escalated. Failed outputs return to Execution with named failure mode and retry instructions.
+- **Common failure modes:** Reviewer rubber-stamping; reviewer rewriting output to make it pass (which masks Bot quality); reviewer accepting outputs that pass internally but won't assemble.
+- **Active anti-drift mechanisms:** Two-axis rubric; no-rewrite rule for Reviewers; pattern-failure tracking across tasks.
+
+### Stage 6 — Integration
+
+- **Entry conditions:** Validated, passed output.
+- **What happens:** Briefing Assembler places the output into its pre-declared destination — section, visual slot, or expandable detail. Traceability metadata is attached: source task ID, citation list, recency timestamp, validation date. Mobile rendering is verified. PDF export is regenerated if affected. Conflicts with existing briefing content are surfaced, not silently overwritten.
+- **Exit conditions:** Output is live in the briefing with traceability intact and renders correctly on mobile and PDF.
+- **Common failure modes:** Output forced into a slot it doesn't fit (signals validation failure that should have caught it); silent overwrite of conflicting prior content; traceability metadata lost during placement.
+- **Active anti-drift mechanisms:** Pre-declared destination enforcement; conflict-surfacing requirement; traceability-metadata preservation rule.
+
+### Stage 7 — Retirement
+
+- **Entry conditions:** Recency timestamp on integrated output is approaching or past the recency requirement; or the subject has been superseded.
+- **What happens:** Operator triages: refresh (re-execute the task with current sources) or retire (archive and remove from briefing). Briefing displays staleness indicators on sections approaching expiration. Refresh decisions consider consumer impact — high-impact stale data is refreshed first.
+- **Exit conditions:** Task is either re-queued for execution with refreshed scope, or archived with the briefing section retired or replaced.
+- **Common failure modes:** Stale data left visible without staleness indicators; refresh queue grows without triage; retired tasks orphan briefing sections.
+- **Active anti-drift mechanisms:** Recency-timestamp visibility on every briefing section; refresh-triage protocol; orphan-section detection on retirement.
+
+## PART 4 — Anatomy of a Containerized Research Task
+
+The canonical task-shape template. Every R&D task in this process is expressible in this structure. All fields below are required unless explicitly marked optional. A task missing any required field cannot exit Scoping.
+
+**Task ID**
+- Purpose: Unique reference for traceability across the lifecycle and into the briefing.
+- Format: Short identifier with a parent-subject prefix and a sequence number.
+- Example: `SQLDB-003`.
+
+**Parent subject**
+- Purpose: Anchors the task to its originating subject so retirement of the parent cascades correctly.
+- Format: Subject name and a one-line description.
+- Example: "Top open-source SQL databases by GitHub star count — comparative landscape for evaluation."
+
+**Specific question**
+- Purpose: A single, narrow, answerable question. The question is the task. If the question takes more than one sentence, it is two tasks.
+- Format: One interrogative sentence with a definite answer space.
+- Example: "What are the top three open-source SQL databases by GitHub star count as of [date], with star count and primary maintainer for each?"
+
+**Scope fence (in scope / out of scope)**
+- Purpose: Prevents lateral drift during execution. The Bot reads this before executing.
+- Format: Two short bulleted lists.
+- Example:
+    - In scope: SQL databases (relational, SQL-first); GitHub-hosted projects; star count as of the named date.
+    - Out of scope: NoSQL databases; SQL-compatible NewSQL projects; non-GitHub-hosted projects; popularity by other metrics (Stack Overflow mentions, downloads, etc.).
+
+**Required output shape**
+- Purpose: Specifies format, length, citation rigor, and recency requirement so the output is shaped correctly the first time.
+- Format: Sub-fields — format, length ceiling, citation rule, recency requirement.
+- Example:
+    - Format: Markdown table.
+    - Length ceiling: 3 rows, 4 columns.
+    - Citation rule: Every star count cited to GitHub repository URL with retrieval date.
+    - Recency requirement: Star counts retrieved within 7 days of task execution.
+
+**Destination mapping** *(REQUIRED — task does not enter execution without this)*
+- Purpose: Names the exact briefing section, visual, or expandable detail this output will feed. Forces the question "where does this go?" to be answered before work begins.
+- Format: Briefing-section identifier, visual or expandable-detail identifier if applicable, and a one-line statement of the consumer question this output answers.
+- Example: "Briefing section: 'Landscape Overview'. Expandable detail: 'Top players by adoption signal'. Consumer question answered: 'Which projects in this space have the strongest community traction?'"
+
+**Briefing-assembly form** *(REQUIRED — task does not enter execution without this)*
+- Purpose: Declares the exact shape the output must take to drop into the briefing slot without rewriting.
+- Format: A precise structural specification — table schema, narrative word ceiling and tone, matrix data structure, diagram input format.
+- Example: "Three-row table with columns: Project Name | Star Count | Primary Maintainer | Source URL. Plain text in cells. No commentary, no narrative wrapper."
+
+**Success criteria**
+- Purpose: How the Reviewer knows the output is good. Distinct from format compliance — this is about correctness and rigor.
+- Format: Bulleted list of pass conditions.
+- Example:
+    - Each row corresponds to a real GitHub repository accessible at the cited URL.
+    - Star counts match what the cited URL displays at the retrieval date.
+    - Primary maintainer is the named individual, organization, or foundation listed on the repository.
+    - Ranking reflects star count descending.
+
+**Validation hooks**
+- Purpose: Self-check questions the Bot must answer before submitting. Catches obvious failures inside the Bot's context before they reach the Reviewer.
+- Format: Bulleted list of yes/no questions the Bot answers in the submission.
+- Example:
+    - Did I retrieve each star count from the cited URL within the recency window? (yes/no)
+    - Is every citation a working URL I successfully accessed? (yes/no)
+    - Did I exclude projects that don't fit the in-scope definition? (yes/no)
+    - Does my output match the briefing-assembly form exactly? (yes/no)
+
+**Failure modes to watch for**
+- Purpose: Names specific drift patterns common to this task type so the Bot self-monitors and the Reviewer knows where to look.
+- Format: Bulleted list naming each failure mode.
+- Example:
+    - Including SQL-compatible-but-not-SQL projects (scope contamination).
+    - Citing star counts from cached or aggregator sources rather than GitHub directly (authority drift).
+    - Adding a fourth row because three felt too short (padding).
+    - Adding commentary or narrative around the table (format drift).
+
+**Stop condition**
+- Purpose: Names the explicit moment the Bot stops. Prevents padding and over-research.
+- Format: One sentence.
+- Example: "Stop after the three top projects are listed with all required columns populated and citations verified. Do not add a fourth row, commentary, methodology section, or recommendations."
+
+**Recency timestamp**
+- Purpose: Captures when source data was retrieved. Required for retirement triage and for briefing staleness indicators.
+- Format: ISO date of retrieval.
+- Example: 2026-04-25.
+
+**Bot-capability profile** *(populated at Scoping, used at Assignment)*
+- Purpose: Names the capability category the Bot needs to execute this task. Drives Assignment decisions.
+- Format: One or more of: retrieval-heavy, computation-heavy, synthesis-heavy, source-restricted, recency-sensitive.
+- Example: "Retrieval-heavy, recency-sensitive."
+
+## PART 5 — Anti-Drift Mechanisms (Named and Operational)
+
+Each mechanism has a name, the failure mode it prevents, the lifecycle stage where it activates, and the Operator's detection signal.
+
+**Scope-Fence Enforcement**
+- Prevents: Scope contamination — the Bot wandering outside the question's boundary.
+- Activates: Scoping (defined), Execution (read by Bot), Validation (checked by Reviewer).
+- Detection signal: Output contains entities, claims, or sub-questions not covered by the in-scope list. Reviewer flags any such content as automatic fail.
+
+**Fresh-Context Rule**
+- Prevents: Context pollution — prior task content leaking into a new task and biasing output.
+- Activates: Assignment.
+- Detection signal: Bot references information not present in the current task package, or produces phrasing characteristic of a prior task. Operator audits by sampling Bot outputs for unattributed claims.
+
+**Stop-Condition Enforcement**
+- Prevents: Padding to hit a target — Bot inflating output to feel "complete."
+- Activates: Execution (Bot self-applies), Validation (Reviewer enforces).
+- Detection signal: Output exceeds the stop condition (extra rows, extra paragraphs, methodology sections that weren't requested, recommendations the task didn't ask for). Automatic fail.
+
+**Citation-Verification Hook**
+- Prevents: Hallucinated citations — fabricated URLs, misattributed quotes, invented sources.
+- Activates: Execution (Bot self-checks each citation), Validation (Reviewer spot-checks).
+- Detection signal: Cited URL returns a 404, returns content that doesn't support the claim, or doesn't exist as a real publication. Reviewer audits a sample on every pass; a single hallucinated citation is automatic fail for the entire output.
+
+**Briefing-Assembly Form Lock**
+- Prevents: Format drift — output produced in the wrong shape and requiring rewrite at Integration.
+- Activates: Scoping (form declared), Execution (Bot produces to form), Validation (Reviewer checks structural match).
+- Detection signal: Output's structure does not match the declared assembly form (extra fields, missing fields, wrong field names, narrative wrapping a table). Automatic fail.
+
+**Source-Authority Whitelist**
+- Prevents: Authority drift — citations sliding from primary sources to aggregators, blog posts, or content farms.
+- Activates: Scoping (authority tier declared if recency-sensitive or contested), Execution (Bot self-restricts), Validation (Reviewer checks citation authority).
+- Detection signal: Citations include known low-authority sources for claims that require primary-source backing. Operator maintains a per-subject authority tier expectation.
+
+**Recency-Timestamp Enforcement**
+- Prevents: Recency rot — stale data presented as current.
+- Activates: Scoping (recency requirement declared), Execution (Bot retrieves within window and stamps), Validation (Reviewer checks stamp), Retirement (operator scans for expired stamps).
+- Detection signal: Stamp is older than the recency requirement at validation time, or briefing section displays a stamp past the recency window without a refresh task queued.
+
+**Synthesis-Boundary Rule**
+- Prevents: Synthesis drift — derived claims that exceed what underlying atomic tasks support.
+- Activates: Synthesis stage (when invoked).
+- Detection signal: Synthesized claim cannot be traced to a specific underlying task output, or the claim asserts more than the underlying tasks individually support. Reviewer requires every synthesis claim to cite the underlying task IDs.
+
+**Destination-Mismatch Detection**
+- Prevents: Destination mismatch — output that, when validated as internally correct, still doesn't fit the briefing slot it was assigned to.
+- Activates: Validation (assembly-readiness axis), Integration (placement check).
+- Detection signal: Output passes task-internal quality but cannot be placed in its declared briefing slot without rewrite, recasting, or extraction. Two distinct sub-signals: (a) Reviewer must rewrite to make output fit (validation fail, return to Execution); (b) Reviewer requests scoping change to redefine the slot (rare, requires Operator escalation — frequent occurrence signals Scoping stage is producing destination mappings without verifying slot shape).
+
+**Visual-Padding Detection**
+- Prevents: Visual padding — visuals proposed without a specific consumer question they answer; visuals added to make a section feel "rich" rather than to clarify.
+- Activates: Scoping (every visual must be tied to a consumer question), Validation (Reviewer challenges visuals without a stated question), Integration (Briefing Assembler refuses placement of unjustified visuals).
+- Detection signal: A proposed visual cannot be paired with a one-line consumer question it answers. Or: the same information is conveyed at equal or higher fidelity by an existing visual or table elsewhere in the briefing. Or: the visual exists to fill space on a section that "looks empty." Operator's prompt at every visual proposal: "What specific consumer question does this answer that no other element answers?" If no answer, the visual is rejected.
+
+## PART 6 — Validation Standards
+
+### Pass/Fail Rubric
+
+A submitted output passes only if all of the following are true:
+
+- **Question answered.** The Specific Question is directly answered, no broader and no narrower.
+- **Scope fence respected.** Output contains nothing outside the in-scope list and addresses everything in scope.
+- **Output shape matches.** Format, length ceiling, citation rule, and recency requirement are all met.
+- **Briefing-assembly form matches.** Output drops into the declared briefing slot without structural rewrite.
+- **Success criteria met.** Every pass condition listed in the task's success criteria is verified.
+- **Validation hooks answered honestly.** Bot's self-check answers are accurate when spot-checked.
+- **Citations rigorous.** Every non-trivial claim has a working citation to a source of acceptable authority. Recency stamps present.
+
+A single failure on any axis is a fail. The Reviewer does not partial-credit.
+
+### Automatic-Fail Conditions
+
+These trigger immediate fail without rubric review:
+
+- Any uncited claim phrased as common knowledge ("industry standard," "everyone knows," "widely accepted") where the claim is non-trivial.
+- Any citation that does not resolve, does not contain the cited content, or is fabricated.
+- Output exceeds stop condition (padding).
+- Output produced in a format other than the briefing-assembly form (format contract violation).
+- Output cannot be assembled into its declared briefing slot without rewrite (assembly-readiness violation).
+- Recency stamp older than the declared recency requirement.
+- Bot did not answer all validation hooks, or answered "no" to one and submitted anyway.
+
+### Escalation Path for Borderline Outputs
+
+When the Reviewer is uncertain — output is mostly compliant but has a borderline issue:
+
+1. Reviewer documents the specific borderline element and the rubric axis in question.
+2. Operator (if not also the Reviewer) reviews and makes a binary call.
+3. If the call requires SME judgment beyond Operator capability, escalate to a designated SME human Reviewer.
+4. Borderline outcomes are logged. Repeated borderlines on the same axis signal a Scoping stage problem (success criteria too vague) — Operator addresses upstream rather than per-task.
+
+### Retry Protocol When Failed
+
+When an output fails:
+
+1. Reviewer attaches the named failure mode (Scope contamination, Padding, Hallucinated citation, Format drift, etc.) and the specific evidence.
+2. Output returns to the Bot with the failure mode named, in the same task package, in a fresh context.
+3. The Bot re-executes with the failure mode as an explicit additional constraint.
+4. After two consecutive failures on the same task, the Operator audits the task scope itself — repeated failure usually means the task is malformed, not the Bot.
+5. After three consecutive failures, the task is returned to Scoping for redesign.
+
+## PART 7 — Synthesis and Briefing Assembly
+
+### Principle of Synthesis
+
+Synthesis is appropriate only when the briefing requires a derived view that no atomic task can produce directly — for example, a comparative ranking that depends on three separate data-collection tasks, or a scenario matrix that combines findings from market, financial, and operational tasks. Default behavior is to keep tasks atomic and let the briefing's structure (sections, expandables, side-by-side tables) carry the comparison. Synthesis is invoked only when the consumer question genuinely cannot be answered by atomic outputs adjacent to each other.
+
+When synthesis is required, the Synthesizer treats the synthesis itself as a new task with its own task package, its own destination mapping, its own assembly form, and its own success criteria. The synthesis task takes the underlying atomic task outputs as inputs and is bound by the Synthesis-Boundary Rule: every synthesized claim must trace to a specific underlying task output, and the claim cannot assert more than the underlying tasks individually support.
+
+### Role of the Briefing Assembler
+
+The Briefing Assembler is responsible for placing validated atomic outputs and validated synthesis outputs into the HTML briefing's pre-declared slots. The Assembler does not rewrite. The Assembler does not editorialize. The Assembler's job is structural: place, link, surface, render, export.
+
+The Assembler enforces the destination format constraints during placement: mobile-first rendering with no horizontal scroll, collapsible sections, expandable layered detail, web-deliverable URL, and a mobile-optimized PDF export that preserves fidelity for forwarding. Sections that would render poorly on mobile (oversized tables, dense matrices that require pinch-zoom) are returned upstream — either Scoping must produce a different briefing-assembly form, or the data must be split across multiple expandables.
+
+### Traceability Preservation
+
+Every claim in the briefing must trace back to its source task and its citations. Implementation is a metadata layer attached to each briefing element: source task ID, validation date, recency stamp, citation list. The HTML briefing exposes this trace through layered detail — the consumer sees the headline claim, can expand to see the citation, can expand further to see the source task ID and execution date. The PDF export preserves citations inline and source task IDs as a footnote layer.
+
+The PE / Operator Investor consumer is data-driven and checks sources. The traceability layer is not optional decoration — it is a feature the consumer uses to assess credibility before forwarding the briefing to a co-investor or LP.
+
+### Surfacing Conflicting Findings
+
+The consumer requires conflicts to be visible, not papered over. When two atomic tasks produce findings that conflict (different sources reporting different numbers; different methodologies producing different rankings; different time horizons producing different forecasts), the Briefing Assembler surfaces the conflict explicitly:
+
+- A "Conflicting Findings" affordance within the relevant briefing section names what conflicts, which tasks produced which finding, and which sources back each finding.
+- The Assembler does not pick a winner. Picking a winner is a Synthesis decision and requires its own synthesis task with explicit reasoning.
+- Where the consumer needs to know which finding to weight, a synthesis task is created to make the weighting explicit, with its reasoning visible.
+
+The principle: the briefing is a document the consumer can audit. Hidden reconciliation is a violation of that contract.
+
+### Mobile-First Rendering, Forwardability, Visual Quality Discipline
+
+The Assembler enforces three destination-imposed constraints during integration:
+
+- **Mobile-first rendering.** Every section, table, visual, and expandable is verified on a narrow viewport before publication. No horizontal scroll. Collapsible behavior verified. Touch targets sized appropriately. Tables exceeding mobile width are reshaped (transpose, split into expandables, or convert to vertical card lists) — but the reshape is a Scoping decision, not an Assembler improvisation.
+- **Forwardability.** The briefing must render correctly when forwarded as a URL or as a PDF without re-explanation. The Assembler verifies that the briefing opens and renders correctly without authentication where the consumer intends to forward, and the PDF export preserves all interactive content as flat readable equivalents (expandables become inline detail; collapsibles become full sections with visible headers).
+- **Visual quality discipline.** Every visual that survives Validation has a declared consumer question it answers (Visual-Padding Detection at Scoping). At Integration, the Assembler verifies the visual's rendered form actually answers the question — a chart with the wrong axis, a matrix with the wrong scale, or a diagram with unreadable labels on mobile is rejected back upstream.
+
+## PART 8 — Refresh and Retirement
+
+### Date-Stamping and Freshness Tracking
+
+Every task carries a recency timestamp captured at execution. The timestamp is preserved through Validation and Integration and surfaces in the briefing on every section, visual, or expandable detail. The Operator maintains a recency-requirement register: per task type or per subject, the maximum age before the output is considered stale.
+
+The Operator's register answers, for any briefing element: how old is the source data, and at what point does it expire?
+
+### Refresh vs. Retire
+
+A task is **refreshed** (re-executed against current sources) when:
+
+- The recency timestamp is past the recency requirement and the underlying subject is still relevant to the briefing.
+- The consumer's interest in the section persists.
+- The likely answer has plausibly changed since the original execution.
+
+A task is **retired** (archived, removed from briefing) when:
+
+- The underlying subject is no longer relevant to the briefing's purpose.
+- The consumer's interest in the section has lapsed.
+- The briefing has been superseded by a newer version that incorporates the finding differently.
+- Retiring a task also requires checking whether dependent synthesis tasks still hold without it; orphan synthesis tasks are retired or rescoped.
+
+Refresh re-runs the original task package, optionally with a refreshed scope if the surrounding context has shifted. Retire archives the task with its history intact and removes the corresponding briefing element (or marks it explicitly as historical).
+
+### Briefing Staleness Visibility
+
+Every briefing section displays its recency timestamp visibly. Sections approaching expiration carry a near-stale indicator; sections past expiration carry a stale indicator. The PDF export preserves these indicators inline.
+
+Staleness visibility serves the consumer directly: the PE / Operator Investor checks data ages before acting on findings. Hidden staleness is a credibility violation.
+
+### Refresh Triage Under Capacity Constraints
+
+When the refresh backlog exceeds Operator capacity:
+
+1. **Triage by consumer impact.** Sections the consumer references most or that drive briefing-level decisions get priority.
+2. **Triage by volatility.** Subjects where the answer changes frequently (active markets, regulatory environments, real-time metrics) get priority over subjects where answers are stable (historical reference data, well-established benchmarks).
+3. **Triage by dependency.** Tasks that feed multiple synthesis outputs get priority over isolated atomic tasks.
+4. **Triage by recency gap.** Tasks past expiration get priority over tasks merely approaching expiration.
+5. **Below-the-line tasks** are visibly marked stale in the briefing rather than silently aging out. The consumer sees the staleness; the Operator commits to the mark rather than to an unkeepable refresh promise.
+
+## PART 9 — Operator Quick-Start Checklist
+
+When introducing a new subject:
+
+1. State the subject in one sentence and the consumer question it answers.
+2. Confirm the subject earns a place in the briefing — name the section.
+3. Decompose the subject into containerized tasks; each task is one specific question.
+4. For each task, write the in-scope list and the out-of-scope list.
+5. For each task, declare the destination mapping — section, visual, or expandable detail.
+6. For each task, declare the briefing-assembly form — exact structural shape.
+7. For each task, write success criteria, validation hooks, failure modes, stop condition, recency requirement.
+8. For each task, name the Bot-capability profile.
+9. Assign each task to a Bot in a fresh context, one task per context.
+10. After execution, validate against the rubric — pass, fail, or escalate.
+11. On pass, integrate into the briefing slot; verify mobile rendering and PDF export.
+12. On fail, return with the named failure mode; cap retries at three before rescoping.
+13. Stamp every output with its recency date; surface staleness in the briefing.
+14. Audit the live task register weekly for drift signals — repeated borderlines, repeated failures, expired stamps without refresh tasks.
+15. Retire or refresh tasks as their recency expires; retire orphan synthesis tasks when their inputs retire.

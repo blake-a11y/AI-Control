@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Opportunity Briefing — Template</title>
+<style>
+/* =========================================================
+   COLOR & TYPE TOKENS — adjust here
+   ========================================================= */
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-alt: #f4f4f2;
+  --border: #e3e3df;
+  --border-strong: #c9c9c2;
+  --text: #1a1a1a;
+  --text-secondary: #5a5a55;
+  --text-tertiary: #8a8a82;
+  --accent: #1f4e79;
+  --accent-soft: #e8eef5;
+  --go: #2d6a3e;
+  --hold: #8a6a1a;
+  --nogo: #8a2a2a;
+  --severity-low: #4a7a5a;
+  --severity-med: #b08a3a;
+  --severity-high: #a04545;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04);
+  --radius: 4px;
+  --space-xs: 0.4rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-stack);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+/* =========================================================
+   HEADER / METADATA
+   ========================================================= */
+.doc-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.doc-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.4rem;
+}
+.doc-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.25;
+}
+.doc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+.doc-meta span strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* =========================================================
+   RECOMMENDATION STRIP — always visible, top
+   ========================================================= */
+.rec-strip {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow);
+}
+.rec-headline {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: var(--space-sm);
+}
+.rec-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.rec-verdict {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.rec-verdict.go { color: var(--go); }
+.rec-verdict.hold { color: var(--hold); }
+.rec-verdict.nogo { color: var(--nogo); }
+.rec-summary {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+.rec-numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-sm);
+}
+.rec-number {
+  text-align: center;
+}
+.rec-number-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  line-height: 1.1;
+}
+.rec-number-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+
+/* =========================================================
+   COLLAPSIBLE SECTIONS
+   ========================================================= */
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  user-select: none;
+  background: var(--surface);
+  border: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+.section-header:hover { background: var(--surface-alt); }
+.section-header:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+.section-meta {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-left: auto;
+  margin-right: 0.75rem;
+}
+.chevron {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--text-secondary);
+  transform: rotate(-45deg);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+.section[data-open="true"] .chevron { transform: rotate(45deg); }
+.section-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 200ms ease;
+}
+.section[data-open="true"] .section-body {
+  max-height: 4000px;
+}
+.section-body-inner {
+  padding: 0 var(--space-md) var(--space-md);
+  border-top: 1px solid var(--border);
+}
+.section.always-open .section-body { max-height: none; }
+.section.always-open .chevron { display: none; }
+.section.always-open .section-header { cursor: default; }
+.section.always-open .section-header:hover { background: var(--surface); }
+
+/* =========================================================
+   CONSUMER FIT — rubric scoring
+   ========================================================= */
+.rubric {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-top: var(--space-sm);
+}
+.rubric-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) 2fr 40px;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.rubric-row:last-child { border-bottom: none; }
+.rubric-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.rubric-bar {
+  background: var(--surface-alt);
+  height: 8px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.rubric-fill {
+  background: var(--accent);
+  height: 100%;
+  border-radius: 4px;
+}
+.rubric-score {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--text);
+}
+
+/* =========================================================
+   KEY NUMBERS TILES
+   ========================================================= */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  padding: var(--space-md);
+}
+.tile {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+}
+.tile-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.3rem;
+}
+.tile-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+.tile-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+/* =========================================================
+   VISUALS — placeholder charts
+   ========================================================= */
+.visual-block {
+  margin-bottom: var(--space-md);
+}
+.visual-block:last-child { margin-bottom: 0; }
+.visual-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+.visual-caption {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.viz-frame {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-sm);
+}
+.viz-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Comparative table */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.comp-table th, .comp-table td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.comp-table th {
+  background: var(--surface-alt);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.comp-table td.num {
+  font-family: var(--font-mono);
+  text-align: right;
+}
+.comp-table tr.highlight td {
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scenario matrix */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.scenario-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--text-tertiary);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+}
+.scenario-card.best { border-top-color: var(--go); }
+.scenario-card.base { border-top-color: var(--accent); }
+.scenario-card.worst { border-top-color: var(--nogo); }
+.scenario-name {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  margin-bottom: 0.4rem;
+}
+.scenario-num {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.scenario-detail {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* =========================================================
+   TSW — Trends / Strengths / Weaknesses (NOT SWOT)
+   ========================================================= */
+.tsw {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: var(--space-sm);
+}
+.tsw-col {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+}
+.tsw-col h4 {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem 0;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.3rem;
+}
+.tsw-col ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.tsw-col li {
+  margin-bottom: 0.4rem;
+  line-height: 1.45;
+}
+
+/* =========================================================
+   RISKS
+   ========================================================= */
+.risk-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.risk-item {
+  display: grid;
+  grid-template-columns: 16px 1fr auto;
+  align-items: start;
+  gap: 0.7rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+.risk-item:last-child { border-bottom: none; }
+.risk-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 0.4rem;
+}
+.risk-dot.low { background: var(--severity-low); }
+.risk-dot.med { background: var(--severity-med); }
+.risk-dot.high { background: var(--severity-high); }
+.risk-text { color: var(--text); }
+.risk-text-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+.risk-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CITATIONS FOOTER
+   ========================================================= */
+.citations {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+}
+.citations h3 {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 0.6rem 0;
+}
+.citations ol {
+  margin: 0;
+  padding-left: 1.4rem;
+  color: var(--text-secondary);
+}
+.citations li {
+  margin-bottom: 0.35rem;
+  line-height: 1.45;
+}
+.citations .cite-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+}
+
+/* =========================================================
+   MOBILE — collapse to single column
+   ========================================================= */
+@media (max-width: 720px) {
+  .wrap { padding: var(--space-sm); }
+  .doc-title { font-size: 1.25rem; }
+  .rec-verdict { font-size: 1.4rem; }
+  .rec-numbers {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .rec-number {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+  .rec-number:last-child { border-bottom: none; padding-bottom: 0; }
+  .rec-number-label { margin-top: 0; text-align: left; }
+  .rec-number-value { font-size: 1.2rem; }
+  .tsw { grid-template-columns: 1fr; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .rubric-row {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+  .rubric-score { text-align: left; }
+  .doc-meta { font-size: 0.72rem; gap: 0.3rem 0.9rem; }
+  .tile-value { font-size: 1.1rem; }
+}
+
+/* =========================================================
+   PRINT — clean PDF export, all sections expanded
+   ========================================================= */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+  .wrap { max-width: 100%; padding: 0; }
+  .section, .rec-strip, .citations {
+    box-shadow: none;
+    page-break-inside: avoid;
+    border: 1px solid #aaa;
+  }
+  .section { margin-bottom: 0.75rem; }
+  .section-body { max-height: none !important; }
+  .section .section-body-inner { display: block !important; }
+  .chevron { display: none; }
+  .section-header { cursor: default; }
+  .rec-strip {
+    border-left: 4px solid #000;
+  }
+  .rec-verdict.go { color: #000; }
+  .rec-verdict.hold { color: #000; }
+  .rec-verdict.nogo { color: #000; }
+  .tsw { grid-template-columns: repeat(3, 1fr); }
+  .scenario-grid { grid-template-columns: repeat(3, 1fr); }
+  .rubric-row { grid-template-columns: minmax(140px, 1fr) 2fr 40px; }
+  a { color: #000; text-decoration: underline; }
+  .doc-meta { font-size: 9pt; }
+  /* avoid orphaned headers */
+  h1, h2, h3, h4 { page-break-after: avoid; }
+  table, .viz-frame { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ========== HEADER / FORWARDABILITY METADATA ========== -->
+  <header class="doc-header">
+    <div class="doc-type">Investment Opportunity Briefing — Template</div>
+    <h1 class="doc-title">[PLACEHOLDER: Deal Name / Target Company]</h1>
+    <div class="doc-meta">
+      <span><strong>Date:</strong> [PLACEHOLDER: YYYY-MM-DD]</span>
+      <span><strong>Version:</strong> [PLACEHOLDER: v0.0]</span>
+      <span><strong>Doc ID:</strong> [PLACEHOLDER: BRF-0000]</span>
+      <span><strong>Prepared for:</strong> [PLACEHOLDER: PE / Operator Investor]</span>
+      <span><strong>Sector:</strong> [PLACEHOLDER: Sector / Sub-sector]</span>
+    </div>
+  </header>
+
+  <!-- ========== RECOMMENDATION STRIP — top, always visible ========== -->
+  <section class="rec-strip" aria-labelledby="rec-h">
+    <div class="rec-headline">
+      <span class="rec-label">Recommendation</span>
+      <span class="rec-verdict go" id="rec-h">[PLACEHOLDER: GO / HOLD / NO-GO]</span>
+    </div>
+    <p class="rec-summary">[PLACEHOLDER: One-sentence rationale — why this is GO/HOLD/NO-GO at this check size, in the consumer's voice, no hype.]</p>
+    <div class="rec-numbers">
+      <div class="rec-number">
+        <div class="rec-number-value">[PLACEHOLDER: IRR%]</div>
+        <div class="rec-number-label">Target IRR</div>
+      </div>
+      <div class="rec-number">
+        <div class="rec-number-value">[PLACEHOLDER: 0.0×]</div>
+        <div class="rec-number-label">Exit Multiple</div>
+      </div>
+      <div class="rec-number">
+        <div class="rec-number-value">[PLACEHOLDER: 0 yrs]</div>
+        <div class="rec-number-label">Exit Horizon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EXECUTIVE SUMMARY ========== -->
+  <section class="section" data-open="false">
+    <button class="section-header" aria-expanded="false">
+      <h2 class="section-title">Executive Summary</h2>
+      <span class="section-meta">~150 words</span>
+      <span class="chevron" aria-hidden="true"></span>
+    </button>
+    <div class="section-body">
+      <div class="section-body-inner">
+        <p>[PLACEHOLDER: Opening sentence stating what the opportunity is and the headline financial case. Approximately 150 words total.]</p>
+        <p>[PLACEHOLDER: Middle sentences covering the consumer-fit thesis — recurring revenue profile, AI/scalability angle, market positioning, why this opportunity at this moment, and the operator's anticipated role post-close.]</p>
+        <p>[PLACEHOLDER: Closing sentences naming the two or three highest-conviction reasons for the recommendation and the single most material risk that could change the answer.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONSUMER FIT — rubric scoring ========== -->
+  <section class="section" data-open="false">
+    <button class="section-header" aria-expanded="false">
+      <h2 class="section-title">Consumer Fit — Thesis Rubric</h2>
+      <span class="section-meta">7 criteria</span>
+      <span class="chevron" aria-hidden="true"></span>
+    </button>
+    <div class="section-body">
+      <div class="section-body-inner">
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+          Each criterion scored 1–10 against the consumer's stated investment thesis. Composite weighting decided per-deal.
+        </p>
+        <div class="rubric">
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: Recurring Revenue]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 80%;"></div></div>
+            <span class="rubric-score">8/10</span>
+          </div>
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: AI Scalability]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 70%;"></div></div>
+            <span class="rubric-score">7/10</span>
+          </div>
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: Market Size]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 60%;"></div></div>
+            <span class="rubric-score">6/10</span>
+          </div>
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: Exit Path]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 90%;"></div></div>
+            <span class="rubric-score">9/10</span>
+          </div>
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: Execution Fit]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 70%;"></div></div>
+            <span class="rubric-score">7/10</span>
+          </div>
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: Risk-Adjusted Return]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 80%;"></div></div>
+            <span class="rubric-score">8/10</span>
+          </div>
+          <div class="rubric-row">
+            <span class="rubric-label">[PLACEHOLDER: Portfolio Diversification]</span>
+            <div class="rubric-bar"><div class="rubric-fill" style="width: 50%;"></div></div>
+            <span class="rubric-score">5/10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== KEY NUMBERS — always open ========== -->
+  <section class="section always-open" data-open="true">
+    <div class="section-header">
+      <h2 class="section-title">Key Numbers</h2>
+      <span class="section-meta">at a glance</span>
+    </div>
+    <div class="section-body">
+      <div class="tiles">
+        <div class="tile">
+          <div class="tile-label">Revenue (TTM)</div>
+          <div class="tile-value">[PLACEHOLDER: $0M]</div>
+          <div class="tile-sub">[PLACEHOLDER: YoY growth]</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">EBITDA</div>
+          <div class="tile-value">[PLACEHOLDER: $0M]</div>
+          <div class="tile-sub">[PLACEHOLDER: margin %]</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Growth Rate</div>
+          <div class="tile-value">[PLACEHOLDER: 00%]</div>
+          <div class="tile-sub">[PLACEHOLDER: 3-yr CAGR]</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Gross Margin</div>
+          <div class="tile-value">[PLACEHOLDER: 00%]</div>
+          <div class="tile-sub">[PLACEHOLDER: trend ↑↓]</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Capital Required</div>
+          <div class="tile-value">[PLACEHOLDER: $0M]</div>
+          <div class="tile-sub">[PLACEHOLDER: check size]</div>
+        </div>
+        <div class="tile">
+          <div class="tile-label">Time to Exit</div>
+          <div class="tile-value">[PLACEHOLDER: 0 yrs]</div>
+          <div class="tile-sub">[PLACEHOLDER: target window]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VISUALS ========== -->
+  <section class="section" data-open="false">
+    <button class="section-header" aria-expanded="false">
+      <h2 class="section-title">Visuals</h2>
+      <span class="section-meta">trend / comparison / scenario / exit</span>
+      <span class="chevron" aria-hidden="true"></span>
+    </button>
+    <div class="section-body">
+      <div class="section-body-inner">
+
+        <!-- Trend line -->
+        <div class="visual-block">
+          <h3 class="visual-title">Revenue Trend — [PLACEHOLDER: time window]</h3>
+          <p class="visual-caption">Answers: <em>Is the top line accelerating, flat, or decaying?</em></p>
+          <div class="viz-frame">
+            <svg class="viz-svg" viewBox="0 0 600 220" role="img" aria-label="Placeholder revenue trend line">
+              <!-- Axes -->
+              <line x1="50" y1="10" x2="50" y2="190" stroke="#c9c9c2" stroke-width="1"/>
+              <line x1="50" y1="190" x2="580" y2="190" stroke="#c9c9c2" stroke-width="1"/>
+              <!-- Y gridlines -->
+              <line x1="50" y1="50" x2="580" y2="50" stroke="#e3e3df" stroke-width="1" stroke-dasharray="2,3"/>
+              <line x1="50" y1="100" x2="580" y2="100" stroke="#e3e3df" stroke-width="1" stroke-dasharray="2,3"/>
+              <line x1="50" y1="150" x2="580" y2="150" stroke="#e3e3df" stroke-width="1" stroke-dasharray="2,3"/>
+              <!-- Y labels -->
+              <text x="44" y="14" text-anchor="end" font-size="10" fill="#8a8a82" font-family="ui-monospace, monospace">[Y4]</text>
+              <text x="44" y="54" text-anchor="end" font-size="10" fill="#8a8a82" font-family="ui-monospace, monospace">[Y3]</text>
+              <text x="44" y="104" text-anchor="end" font-size="10" fill="#8a8a82" font-family="ui-monospace, monospace">[Y2]</text>
+              <text x="44" y="154" text-anchor="end" font-size="10" fill="#8a8a82" font-family="ui-monospace, monospace">[Y1]</text>
+              <text x="44" y="194" text-anchor="end" font-size="10" fill="#8a8a82" font-family="ui-monospace, monospace">[0]</text>
+              <!-- X labels -->
+              <text x="80"  y="208" text-anchor="middle" font-size="10" fill="#8a8a82">[T-4]</text>
+              <text x="180" y="208" text-anchor="middle" font-size="10" fill="#8a8a82">[T-3]</text>
+              <text x="280" y="208" text-anchor="middle" font-size="10" fill="#8a8a82">[T-2]</text>
+              <text x="380" y="208" text-anchor="middle" font-size="10" fill="#8a8a82">[T-1]</text>
+              <text x="480" y="208" text-anchor="middle" font-size="10" fill="#8a8a82">[T]</text>
+              <text x="560" y="208" text-anchor="middle" font-size="10" fill="#8a8a82">[T+1]</text>
+              <!-- Line -->
+              <polyline points="80,170 180,150 280,130 380,95 480,55 560,30"
+                fill="none" stroke="#1f4e79" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <!-- Points -->
+              <circle cx="80"  cy="170" r="3.5" fill="#1f4e79"/>
+              <circle cx="180" cy="150" r="3.5" fill="#1f4e79"/>
+              <circle cx="280" cy="130" r="3.5" fill="#1f4e79"/>
+              <circle cx="380" cy="95"  r="3.5" fill="#1f4e79"/>
+              <circle cx="480" cy="55"  r="3.5" fill="#1f4e79"/>
+              <circle cx="560" cy="30"  r="3.5" fill="#1f4e79" stroke="#fff" stroke-width="1.5"/>
+              <!-- Forecast indicator -->
+              <line x1="480" y1="10" x2="480" y2="190" stroke="#c9c9c2" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="488" y="20" font-size="10" fill="#8a8a82">forecast →</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Comparative table -->
+        <div class="visual-block">
+          <h3 class="visual-title">Comparative Table — vs. [PLACEHOLDER: comparables]</h3>
+          <p class="visual-caption">Answers: <em>How does this opportunity benchmark against alternatives?</em></p>
+          <div class="viz-frame">
+            <div class="table-scroll">
+              <table class="comp-table">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>[PLACEHOLDER: Target]</th>
+                    <th>[PLACEHOLDER: Comp A]</th>
+                    <th>[PLACEHOLDER: Comp B]</th>
+                    <th>[PLACEHOLDER: Sector Median]</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td>Revenue</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                  </tr>
+                  <tr>
+                    <td>EBITDA Margin</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                  </tr>
+                  <tr>
+                    <td>Growth (3-yr CAGR)</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                  </tr>
+                  <tr>
+                    <td>Net Retention</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                  </tr>
+                  <tr>
+                    <td>Implied Multiple</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                    <td class="num">[PLACEHOLDER]</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario matrix -->
+        <div class="visual-block">
+          <h3 class="visual-title">Scenario Matrix — Best / Base / Worst</h3>
+          <p class="visual-caption">Answers: <em>What's the realistic range of outcomes, and what kills the base case?</em></p>
+          <div class="viz-frame">
+            <div class="scenario-grid">
+              <div class="scenario-card best">
+                <div class="scenario-name">Best</div>
+                <div class="scenario-num">[PLACEHOLDER: 0.0× / IRR%]</div>
+                <div class="scenario-detail">[PLACEHOLDER: trigger conditions — what has to go right]</div>
+              </div>
+              <div class="scenario-card base">
+                <div class="scenario-name">Base</div>
+                <div class="scenario-num">[PLACEHOLDER: 0.0× / IRR%]</div>
+                <div class="scenario-detail">[PLACEHOLDER: most likely path — current execution rate continues]</div>
+              </div>
+              <div class="scenario-card worst">
+                <div class="scenario-name">Worst</div>
+                <div class="scenario-num">[PLACEHOLDER: 0.0× / IRR%]</div>
+                <div class="scenario-detail">[PLACEHOLDER: downside path — what breaks the thesis]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exit-path diagram -->
+        <div class="visual-block">
+          <h3 class="visual-title">Exit-Path Diagram</h3>
+          <p class="visual-caption">Answers: <em>Who buys this, on what timeline, at what multiple?</em></p>
+          <div class="viz-frame">
+            <svg class="viz-svg" viewBox="0 0 600 240" role="img" aria-label="Placeholder exit-path diagram">
+              <!-- Origin node -->
+              <rect x="20" y="100" width="120" height="40" rx="4" fill="#fff" stroke="#1f4e79" stroke-width="1.5"/>
+              <text x="80" y="118" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="600">[PLACEHOLDER]</text>
+              <text x="80" y="132" text-anchor="middle" font-size="9" fill="#5a5a55">Current State</text>
+
+              <!-- Path lines -->
+              <line x1="140" y1="115" x2="240" y2="40"  stroke="#c9c9c2" stroke-width="1.5"/>
+              <line x1="140" y1="120" x2="240" y2="120" stroke="#1f4e79" stroke-width="2"/>
+              <line x1="140" y1="125" x2="240" y2="200" stroke="#c9c9c2" stroke-width="1.5"/>
+
+              <!-- Path 1 — Strategic -->
+              <rect x="240" y="20" width="160" height="40" rx="4" fill="#fff" stroke="#c9c9c2" stroke-width="1"/>
+              <text x="320" y="38" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="600">Strategic Acquirer</text>
+              <text x="320" y="52" text-anchor="middle" font-size="9" fill="#5a5a55">[PLACEHOLDER: 0.0× / yrs]</text>
+
+              <!-- Path 2 — Sponsor -->
+              <rect x="240" y="100" width="160" height="40" rx="4" fill="#fff" stroke="#1f4e79" stroke-width="2"/>
+              <text x="320" y="118" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="600">Secondary PE</text>
+              <text x="320" y="132" text-anchor="middle" font-size="9" fill="#5a5a55">[PLACEHOLDER: 0.0× / yrs] — base</text>
+
+              <!-- Path 3 — IPO -->
+              <rect x="240" y="180" width="160" height="40" rx="4" fill="#fff" stroke="#c9c9c2" stroke-width="1"/>
+              <text x="320" y="198" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="600">IPO / Public</text>
+              <text x="320" y="212" text-anchor="middle" font-size="9" fill="#5a5a55">[PLACEHOLDER: 0.0× / yrs]</text>
+
+              <!-- Outcome node -->
+              <line x1="400" y1="40"  x2="500" y2="115" stroke="#c9c9c2" stroke-width="1.5"/>
+              <line x1="400" y1="120" x2="500" y2="120" stroke="#1f4e79" stroke-width="2"/>
+              <line x1="400" y1="200" x2="500" y2="125" stroke="#c9c9c2" stroke-width="1.5"/>
+              <rect x="500" y="100" width="90" height="40" rx="4" fill="#e8eef5" stroke="#1f4e79" stroke-width="1.5"/>
+              <text x="545" y="118" text-anchor="middle" font-size="11" fill="#1a1a1a" font-weight="600">Exit</text>
+              <text x="545" y="132" text-anchor="middle" font-size="9" fill="#5a5a55">[PLACEHOLDER]</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TSW (Trends / Strengths / Weaknesses — NOT SWOT) ========== -->
+  <section class="section" data-open="false">
+    <button class="section-header" aria-expanded="false">
+      <h2 class="section-title">TSW Analysis</h2>
+      <span class="section-meta">Trends · Strengths · Weaknesses</span>
+      <span class="chevron" aria-hidden="true"></span>
+    </button>
+    <div class="section-body">
+      <div class="section-body-inner">
+        <div class="tsw">
+          <div class="tsw-col">
+            <h4>Trends</h4>
+            <ul>
+              <li>[PLACEHOLDER: external macro/sector trend tailwind]</li>
+              <li>[PLACEHOLDER: customer behavior shift this opportunity rides]</li>
+              <li>[PLACEHOLDER: regulatory or technology curve relevant to thesis]</li>
+              <li>[PLACEHOLDER: capital flow / multiple-environment trend]</li>
+            </ul>
+          </div>
+          <div class="tsw-col">
+            <h4>Strengths</h4>
+            <ul>
+              <li>[PLACEHOLDER: structural moat — what's hard to replicate]</li>
+              <li>[PLACEHOLDER: management track record / domain expertise]</li>
+              <li>[PLACEHOLDER: financial profile — recurring rev / cash conversion]</li>
+              <li>[PLACEHOLDER: operational lever the consumer can pull post-close]</li>
+            </ul>
+          </div>
+          <div class="tsw-col">
+            <h4>Weaknesses</h4>
+            <ul>
+              <li>[PLACEHOLDER: customer concentration / channel dependency]</li>
+              <li>[PLACEHOLDER: technical debt / capex requirement]</li>
+              <li>[PLACEHOLDER: gap in management bench]</li>
+              <li>[PLACEHOLDER: working capital / unit economics issue]</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RISKS ========== -->
+  <section class="section" data-open="false">
+    <button class="section-header" aria-expanded="false">
+      <h2 class="section-title">Risks</h2>
+      <span class="section-meta">severity-tagged</span>
+      <span class="chevron" aria-hidden="true"></span>
+    </button>
+    <div class="section-body">
+      <div class="section-body-inner">
+        <ul class="risk-list">
+          <li class="risk-item">
+            <span class="risk-dot high" aria-label="High severity"></span>
+            <span class="risk-text">
+              [PLACEHOLDER: Highest-severity risk — the one that flips the recommendation]
+              <span class="risk-text-sub">[PLACEHOLDER: mitigant or diligence step]</span>
+            </span>
+            <span class="risk-tag">High</span>
+          </li>
+          <li class="risk-item">
+            <span class="risk-dot high" aria-label="High severity"></span>
+            <span class="risk-text">
+              [PLACEHOLDER: Concentration / dependency risk]
+              <span class="risk-text-sub">[PLACEHOLDER: mitigant]</span>
+            </span>
+            <span class="risk-tag">High</span>
+          </li>
+          <li class="risk-item">
+            <span class="risk-dot med" aria-label="Medium severity"></span>
+            <span class="risk-text">
+              [PLACEHOLDER: Execution risk]
+              <span class="risk-text-sub">[PLACEHOLDER: mitigant]</span>
+            </span>
+            <span class="risk-tag">Medium</span>
+          </li>
+          <li class="risk-item">
+            <span class="risk-dot med" aria-label="Medium severity"></span>
+            <span class="risk-text">
+              [PLACEHOLDER: Market timing / cycle risk]
+              <span class="risk-text-sub">[PLACEHOLDER: mitigant]</span>
+            </span>
+            <span class="risk-tag">Medium</span>
+          </li>
+          <li class="risk-item">
+            <span class="risk-dot low" aria-label="Low severity"></span>
+            <span class="risk-text">
+              [PLACEHOLDER: Lower-severity risk worth flagging for forwardability]
+              <span class="risk-text-sub">[PLACEHOLDER: mitigant]</span>
+            </span>
+            <span class="risk-tag">Low</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOURCE CITATIONS ========== -->
+  <footer class="citations">
+    <h3>Source Citations &nbsp;·&nbsp; Forwardable References</h3>
+    <ol>
+      <li>[PLACEHOLDER: Source 1 — full citation, author/publisher, URL or doc location] <span class="cite-date">[PLACEHOLDER: YYYY-MM-DD]</span></li>
+      <li>[PLACEHOLDER: Source 2 — financial filing, audit, or data room reference] <span class="cite-date">[PLACEHOLDER: YYYY-MM-DD]</span></li>
+      <li>[PLACEHOLDER: Source 3 — sector report or comparable transaction database] <span class="cite-date">[PLACEHOLDER: YYYY-MM-DD]</span></li>
+      <li>[PLACEHOLDER: Source 4 — management interview / call notes] <span class="cite-date">[PLACEHOLDER: YYYY-MM-DD]</span></li>
+      <li>[PLACEHOLDER: Source 5 — independent diligence / expert network] <span class="cite-date">[PLACEHOLDER: YYYY-MM-DD]</span></li>
+    </ol>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // Collapse/expand
+  var sections = document.querySelectorAll('.section:not(.always-open)');
+  sections.forEach(function(sec){
+    var btn = sec.querySelector('.section-header');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      var isOpen = sec.getAttribute('data-open') === 'true';
+      sec.setAttribute('data-open', isOpen ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+  // Before printing, force-open everything so the PDF includes all content
+  window.addEventListener('beforeprint', function(){
+    document.querySelectorAll('.section').forEach(function(s){
+      s.setAttribute('data-was-open', s.getAttribute('data-open') || 'false');
+      s.setAttribute('data-open', 'true');
+    });
+  });
+  window.addEventListener('afterprint', function(){
+    document.querySelectorAll('.section').forEach(function(s){
+      var prev = s.getAttribute('data-was-open') || 'false';
+      s.setAttribute('data-open', prev);
+    });
+  });
+})();
+</script>
+</body>
+</html>
